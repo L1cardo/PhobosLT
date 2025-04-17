@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Phobos LapTimer</title>
+    <title>LicardoFPV 计时器</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="jquery-3.7.1.min.js"></script>
@@ -16,14 +16,14 @@
       <nav>
         <div class="logo">
           <img src="favicon.ico" alt="PLT" width="64" />
-          <h1>Phobos LapTimer</h1>
+          <h1>LicardoFPV 计时器</h1>
         </div>
       </nav>
       <ul class="nav-links">
-        <li><a id="nav-link-config" class="tablinks active" onclick="openTab(event, 'config')">Configuration</a></li>
-        <li><a id="nav-link-race" class="tablinks" onclick="openTab(event, 'race')">Race</a></li>
-        <li><a id="nav-link-calib" class="tablinks" onclick="openTab(event, 'calib')">Calibration</a></li>
-        <li><a id="nav-link-ota" class="tablinks" onclick="openTab(event, 'ota')">Update</a></li>
+        <li><a id="nav-link-config" class="tablinks active" onclick="openTab(event, 'config')">配置</a></li>
+        <li><a id="nav-link-race" class="tablinks" onclick="openTab(event, 'race')">比赛</a></li>
+        <li><a id="nav-link-calib" class="tablinks" onclick="openTab(event, 'calib')">校准</a></li>
+        <li><a id="nav-link-ota" class="tablinks" onclick="openTab(event, 'ota')">升级</a></li>
       </ul>
     </header>
 
@@ -32,7 +32,7 @@
         <div class="config-container">
           <div id="bandChannelFreq">
             <div class="config-item">
-              <label for="bandSelect">Band:</label>
+              <label for="bandSelect">频段:</label>
               <select id="bandSelect">
                 <option value="A">A</option>
                 <option value="B">B</option>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="config-item">
-              <label for="channelSelect">Channel:</label>
+              <label for="channelSelect">频道:</label>
               <select id="channelSelect">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -63,7 +63,7 @@
           </div>
 
           <div class="config-item">
-            <label for="minLap">Minimum Lap Time:</label>
+            <label for="minLap">每圈最短时间:</label>
             <div class="input-with-value">
               <span class="val">10.0s</span>
               <input type="range" id="minLap" step="0.5" min="1" max="10" value="10.0" oninput="updateMinLap(this,value)" />
@@ -71,7 +71,7 @@
           </div>
 
           <div class="config-item">
-            <label for="alarmThreshold">Low Battery Alarm:</label>
+            <label for="alarmThreshold">低电量报警:</label>
             <div class="input-with-value">
               <span class="val">3.6v</span>
               <input type="range" id="alarmThreshold" step="0.1" min="2.6" max="3.6" value="3.0" oninput="updateAlarmThreshold(this,value)" />
@@ -79,18 +79,18 @@
           </div>
 
           <div class="config-item">
-            <label for="announcerSelect">Announcer Type:</label>
+            <label for="announcerSelect">播报设置:</label>
             <select id="announcerSelect">
-              <option value="none">None</option>
-              <option value="beep">Beep</option>
-              <option value="1lap">Lap Time</option>
-              <option value="2lap">2 Consecutive Laps Time</option>
-              <option value="3lap">3 Consecutive Laps Time</option>
+              <option value="none">无</option>
+              <option value="beep">哔哔声</option>
+              <option value="1lap">圈时间</option>
+              <option value="2lap">连续 2 圈时间</option>
+              <option value="3lap">连续 3 圈时间</option>
             </select>
           </div>
 
           <div class="config-item">
-            <label for="rate">Announcer Rate:</label>
+            <label for="rate">播报速度:</label>
             <div class="input-with-value">
               <span class="val">1.0</span>
               <input type="range" min="0.1" max="2" step="0.1" id="rate" value="1.0" oninput="updateAnnouncerRate(this,value)" />
@@ -98,40 +98,40 @@
           </div>
 
           <div class="config-item">
-            <label for="pname">Pilot name:</label>
+            <label for="pname">飞手名称:</label>
             <input type="text" id="pname" maxlength="20" />
           </div>
 
           <div class="config-item" style="display: none">
-            <label for="ssid">WiFi SSID:</label>
+            <label for="ssid">WiFi 名称:</label>
             <input type="text" id="ssid" maxlength="32" />
           </div>
 
           <div class="config-item" style="display: none">
-            <label for="pwd">WiFi Password:</label>
+            <label for="pwd">WiFi 密码:</label>
             <input type="password" id="pwd" maxlength="32" />
           </div>
         </div>
-        <button id="EnableAudioButton" onclick="enableAudioLoop()">Enable voice</button>
-        <button id="DisableAudioButton" onclick="disableAudioLoop()">Disable voice</button>
-        <button id="GenerateAudioButton" onclick="generateAudio()">Test voice</button>
+        <button id="EnableAudioButton" onclick="enableAudioLoop()">开启声音</button>
+        <button id="DisableAudioButton" onclick="disableAudioLoop()">关闭声音</button>
+        <button id="GenerateAudioButton" onclick="generateAudio()">测试声音</button>
         <br>
-        <button onclick="saveConfig()">Save Configuration</button>
+        <button onclick="saveConfig()">保存配置</button>
       </div>
 
       <div id="race" class="tabcontent">
         <span id="timer">00:00:00 s</span>
         <div class="racebuttons">
-          <button id="startRaceButton" onclick="startRace()">Start Race</button>
-          <button id="stopRaceButton" onclick="stopRace()" disabled>Stop Race</button>
-          <button id="clearLapsButton" onclick="clearLaps()">Clear Laps</button>
+          <button id="startRaceButton" onclick="startRace()">开始比赛</button>
+          <button id="stopRaceButton" onclick="stopRace()" disabled>停止比赛</button>
+          <button id="clearLapsButton" onclick="clearLaps()">清除数据</button>
         </div>
         <table id="lapTable">
           <tr>
-            <th>Lap No</th>
-            <th>Lap Time</th>
-            <th>2 Lap Time</th>
-            <th>3 Lap Time</th>
+            <th>圈</th>
+            <th>圈时</th>
+            <th>2 圈时间</th>
+            <th>3 圈时间</th>
           </tr>
         </table>
       </div>
@@ -141,20 +141,20 @@
           <canvas id="rssiChart"></canvas>
         </div>
         <div class="config-item">
-          <label for="enter">Enter RSSI:</label>
+          <label for="enter">进入 RSSI:</label>
           <div class="input-with-value">
             <span id="enterSpan" class="val">120</span>
             <input type="range" min="50" max="255" step="1" id="enter" value="120" oninput="updateEnterRssi(this,value)" />
           </div>
         </div>
         <div class="config-item">
-          <label for="exit">Exit RSSI:</label>
+          <label for="exit">离开 RSSI:</label>
           <div class="input-with-value">
             <span id="exitSpan" class="val">100</span>
             <input type="range" min="50" max="255" step="1" id="exit" value="100" oninput="updateExitRssi(this,value)" />
           </div>
         </div>
-        <button onclick="saveConfig()">Save RSSI Thresholds</button>
+        <button onclick="saveConfig()">保存 RSSI 阈值</button>
       </div>
 
       <div id="ota" class="tabcontent">
@@ -165,7 +165,7 @@
     </main>
 
     <footer>
-      <p>Powered by <a href="https://github.com/phobos-/PhobosLT" target="_blank" style="color: white">PhobosLT</a></p>
+      <p>由 <a href="https://space.bilibili.com/7403418" target="_blank" style="color: white">LicardoFPV</a> 用 ❤ 制作</p>
     </footer>
 
     <script src="script.js"></script>

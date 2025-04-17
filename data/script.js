@@ -331,26 +331,26 @@ function addLap(lapStr) {
       break;
     case "1lap":
       if (lapNo == 0) {
-        queueSpeak("<p>Hole Shot<p>");
+        queueSpeak("<p>首次过门<p>");
       } else {
-        const lapNoStr = pilotName + " Lap " + lapNo + ", ";
+        const lapNoStr = pilotName + " 圈 " + lapNo + ", ";
         const text = "<p>" + lapNoStr + lapStr.replace(".", ",") + "</p>";
         queueSpeak(text);
       }
       break;
     case "2lap":
       if (lapNo == 0) {
-        queueSpeak("<p>Hole Shot<p>");
+        queueSpeak("<p>首次过门<p>");
       } else if (last2lapStr != "") {
-        const text2 = "<p>" + pilotName + " 2 laps " + last2lapStr.replace(".", ",") + "</p>";
+        const text2 = "<p>" + pilotName + " 2 圈 " + last2lapStr.replace(".", ",") + "</p>";
         queueSpeak(text2);
       }
       break;
     case "3lap":
       if (lapNo == 0) {
-        queueSpeak("<p>Hole Shot<p>");
+        queueSpeak("<p>首次过门<p>");
       } else if (last3lapStr != "") {
-        const text3 = "<p>" + pilotName + " 3 laps " + last3lapStr.replace(".", ",") + "</p>";
+        const text3 = "<p>" + pilotName + " 3 圈 " + last3lapStr.replace(".", ",") + "</p>";
         queueSpeak(text3);
       }
       break;
@@ -427,7 +427,7 @@ function generateAudio() {
   }
 
   const pilotName = pilotNameInput.value;
-  queueSpeak('<div>testing sound for pilot ' + pilotName + '</div>');
+  queueSpeak('<div>正在测试声音, ' + pilotName + ', </div>');
   for (let i = 1; i <= 3; i++) {
     queueSpeak('<div>' + i + '</div>')
   }
@@ -440,9 +440,11 @@ function doSpeak(obj) {
 async function startRace() {
   //stopRace();
   startRaceButton.disabled = true;
-  queueSpeak('<p>Starting race in less than five</p>');
+  queueSpeak('<p>比赛即将开始</p>');
   await new Promise((r) => setTimeout(r, 2000));
   beep(1, 1, "square"); // needed for some reason to make sure we fire the first beep
+  beep(100, 440, "square");
+  await new Promise((r) => setTimeout(r, 1000));
   beep(100, 440, "square");
   await new Promise((r) => setTimeout(r, 1000));
   beep(100, 440, "square");
@@ -453,7 +455,7 @@ async function startRace() {
 }
 
 function stopRace() {
-  queueSpeak('<p>Race stopped</p>');
+  queueSpeak('<p>比赛停止</p>');
   clearInterval(timerInterval);
   timer.innerHTML = "00:00:00 s";
 

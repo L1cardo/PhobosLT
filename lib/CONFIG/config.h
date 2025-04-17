@@ -29,7 +29,7 @@
 #define PIN_RX5808_DATA 6     //CH1
 #define PIN_RX5808_SELECT 7   //CH2
 #define PIN_RX5808_CLOCK 4    //CH3
-#define PIN_BUZZER 5
+#define PIN_BUZZER 2
 #define BUZZER_INVERTED false
 
 //ESP32-S3

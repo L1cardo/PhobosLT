@@ -15,9 +15,9 @@ static IPAddress ipAddress;
 static AsyncWebServer server(80);
 static AsyncEventSource events("/events");
 
-static const char *wifi_hostname = "plt";
-static const char *wifi_ap_ssid_prefix = "PhobosLT";
-static const char *wifi_ap_password = "phoboslt";
+static const char *wifi_hostname = "llt";
+static const char *wifi_ap_ssid_prefix = "LicardoTimer";
+static const char *wifi_ap_password = "licardotimer";
 static const char *wifi_ap_address = "20.0.0.1";
 String wifi_ap_ssid;
 
